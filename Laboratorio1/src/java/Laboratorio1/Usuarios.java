@@ -6,16 +6,19 @@
 package Laboratorio1;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,6 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuarios.findByCorreo", query = "SELECT u FROM Usuarios u WHERE u.correo = :correo"),
     @NamedQuery(name = "Usuarios.findById", query = "SELECT u FROM Usuarios u WHERE u.id = :id")})
 public class Usuarios implements Serializable {
+
+    @OneToMany(mappedBy = "idPadre")
+    private Collection<Hijos> hijosCollection;
 
     private static final long serialVersionUID = 1L;
     @Size(max = 30)
@@ -98,6 +104,15 @@ public class Usuarios implements Serializable {
     @Override
     public String toString() {
         return "Laboratorio1.Usuarios[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Hijos> getHijosCollection() {
+        return hijosCollection;
+    }
+
+    public void setHijosCollection(Collection<Hijos> hijosCollection) {
+        this.hijosCollection = hijosCollection;
     }
     
 }
