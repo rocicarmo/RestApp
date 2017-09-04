@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(Laboratorio1.service.HijosFacadeREST.class);
         resources.add(Laboratorio1.service.UsuariosFacadeREST.class);
+        resources.add(Laboratorio1.service.VacunasFacadeREST.class);
     }
     
 }
